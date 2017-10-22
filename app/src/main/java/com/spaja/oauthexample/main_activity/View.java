@@ -10,4 +10,5 @@ interface View {
 
     void displayEggsMessage(Response response);
 
+    void displayEggsMessageToken(String s);
 }

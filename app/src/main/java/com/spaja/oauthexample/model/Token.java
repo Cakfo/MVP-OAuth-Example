@@ -11,15 +11,15 @@ public class Token {
     private String token_type;
     private String scope;
 
-    public String getAccess_token() {
+    public String getAccessToken() {
         return access_token;
     }
 
-    public String getExpires_in() {
+    public String getExpiresIn() {
         return expires_in;
     }
 
-    public String getToken_type() {
+    public String getTokenType() {
         return token_type;
     }
 
