@@ -13,6 +13,7 @@ public class MainActivity extends AppCompatActivity implements View {
 
     @BindView(R.id.text)
     TextView textView;
+    private Presenter examplePresenter;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -22,7 +23,7 @@ public class MainActivity extends AppCompatActivity implements View {
 
 //      Button button = (Button) findViewById(R.id.button);
 
-        Presenter examplePresenter = new Presenter(new EggsRepositoryImpl(), this);
+        examplePresenter = new Presenter(new EggsRepositoryImpl(), this);
         examplePresenter.getEggs();
 
     }
@@ -33,5 +34,11 @@ public class MainActivity extends AppCompatActivity implements View {
         if (response != null) {
             textView.setText(response);
         }
+    }
+
+    @Override
+    protected void onDestroy() {
+        super.onDestroy();
+        examplePresenter.clearResources();
     }
 }
