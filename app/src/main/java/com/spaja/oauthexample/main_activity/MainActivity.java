@@ -5,14 +5,14 @@ import android.support.v7.app.AppCompatActivity;
 import android.widget.TextView;
 
 import com.spaja.oauthexample.R;
-import com.spaja.oauthexample.model.Response;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
 
 public class MainActivity extends AppCompatActivity implements View {
 
-    @BindView(R.id.text) TextView textView;
+    @BindView(R.id.text)
+    TextView textView;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -28,17 +28,10 @@ public class MainActivity extends AppCompatActivity implements View {
     }
 
     @Override
-    public void displayEggsMessage(Response response) {
-//        TextView textView = (TextView) findViewById(R.id.text);
-//        if (response != null) {
-//            textView.setText(response.getMessage());
-//        }
-    }
-
-    @Override
-    public void displayEggsMessageToken(String s) {
-        if (s != null) {
-            textView.setText(s);
+    public void displayEggsMessage(String response) {
+        TextView textView = (TextView) findViewById(R.id.text);
+        if (response != null) {
+            textView.setText(response);
         }
     }
 }

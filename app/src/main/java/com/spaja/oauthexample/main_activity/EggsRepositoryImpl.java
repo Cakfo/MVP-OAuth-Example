@@ -5,11 +5,6 @@ import com.spaja.oauthexample.model.Token;
 import com.spaja.oauthexample.networking.ChickenFarmAPI;
 
 import io.reactivex.Single;
-import io.reactivex.SingleObserver;
-import io.reactivex.android.schedulers.AndroidSchedulers;
-import io.reactivex.annotations.NonNull;
-import io.reactivex.disposables.Disposable;
-import io.reactivex.schedulers.Schedulers;
 import retrofit2.Call;
 
 /**
@@ -18,9 +13,9 @@ import retrofit2.Call;
 
 class EggsRepositoryImpl implements EggsRepository {
 
-    private static final String CLIENT_ID = "OAuthExample";
-    private static final String CLIENT_SECRET = "d52b1249416c66b287a6ac54529ad84d";
-    private static final String USER_ID = "2110";
+    public static final String CLIENT_ID = "OAuthExample";
+    public static final String CLIENT_SECRET = "d52b1249416c66b287a6ac54529ad84d";
+    public static final String USER_ID = "2110";
     private Call<Token> tokenCall;
     private Call<Response> responseCall;
 

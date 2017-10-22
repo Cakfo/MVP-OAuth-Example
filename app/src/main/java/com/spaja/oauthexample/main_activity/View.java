@@ -8,7 +8,6 @@ import com.spaja.oauthexample.model.Response;
 
 interface View {
 
-    void displayEggsMessage(Response response);
+    void displayEggsMessage(String response);
 
-    void displayEggsMessageToken(String s);
 }

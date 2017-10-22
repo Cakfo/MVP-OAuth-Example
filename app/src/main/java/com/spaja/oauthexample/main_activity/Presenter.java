@@ -1,11 +1,15 @@
 package com.spaja.oauthexample.main_activity;
 
+import com.spaja.oauthexample.model.Response;
 import com.spaja.oauthexample.model.Token;
+import com.spaja.oauthexample.networking.ChickenFarmAPI;
 
+import io.reactivex.Single;
 import io.reactivex.SingleObserver;
 import io.reactivex.android.schedulers.AndroidSchedulers;
 import io.reactivex.annotations.NonNull;
 import io.reactivex.disposables.Disposable;
+import io.reactivex.functions.Function;
 import io.reactivex.schedulers.Schedulers;
 
 /**
@@ -25,17 +29,23 @@ class Presenter {
     void getEggs() {
 
         repository.getEggsReactively()
-                .observeOn(AndroidSchedulers.mainThread())
+                .flatMap(new Function<Token, Single<Response>>() {
+                    @Override
+                    public Single<Response> apply(@NonNull Token token) throws Exception {
+                        return ChickenFarmAPI.serviceReact.collectEggsReact(EggsRepositoryImpl.USER_ID, "Bearer " + token.getAccessToken());
+                    }
+                })
                 .subscribeOn(Schedulers.io())
-                .subscribe(new SingleObserver<Token>() {
+                .observeOn(AndroidSchedulers.mainThread())
+                .subscribe(new SingleObserver<Response>() {
                     @Override
                     public void onSubscribe(@NonNull Disposable d) {
 
                     }
 
                     @Override
-                    public void onSuccess(@NonNull Token token) {
-                        view.displayEggsMessageToken(token.getAccessToken());
+                    public void onSuccess(@NonNull Response response) {
+                        view.displayEggsMessage(response.getMessage());
                     }
 
                     @Override
